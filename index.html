@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ===== SEO ===== -->
+  <title>Lovely AW Co — App &amp; Web Developer | Building Useful Apps and Web Solutions</title>
+  <meta name="description" content="Independent app and web developer building mobile applications and web platforms focused on education, productivity, accessibility, and everyday convenience." />
+  <meta name="keywords" content="app developer, web developer, Android developer, mobile apps, web solutions, Cute Tutor, ScheduleMsg, LogoHub, freelance developer" />
+  <meta name="author" content="Lovely AW Co" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#0a0a0a" />
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Lovely AW Co — App &amp; Web Developer" />
+  <meta property="og:description" content="Building useful apps and web solutions focused on education, productivity, accessibility, and everyday convenience." />
+  <meta property="og:image" content="assets/images/dev/og-banner.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" type="image/svg+xml" href="assets/images/dev/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- Structured data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Lovely AW Co",
+    "jobTitle": "App & Web Developer",
+    "email": "mailto:logos.links.2025@gmail.com",
+    "knowsAbout": ["Android Development", "Java", "Kotlin", "HTML", "CSS", "JavaScript", "Firebase", "UI/UX Design"],
+    "description": "Independent developer building mobile applications and web platforms focused on education, productivity, accessibility, and everyday convenience."
+  }
+  </script>
+</head>
+
+<body>
+  <!-- Skip link for accessibility -->
+  <a href="#hero" class="skip-link">Skip to main content</a>
+
+  <!-- ============ NAVBAR ============ -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="#hero" class="brand" aria-label="Lovely AW Co home">
+        <img src="assets/images/dev/logo-dev.svg" alt="Lovely AW Co logo" class="brand-logo" width="40" height="40" />
+        <span class="brand-name">Lovely AW <span class="accent">Co</span></span>
+      </a>
+
+      <nav class="nav-links" id="navLinks" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#apps">Apps</a>
+        <a href="#web">Web</a>
+        <a href="#future">Future</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#skills">Skills</a>
+        <a href="#services" class="nav-cta">Services</a>
+      </nav>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="hero">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="container hero-inner reveal">
+        <img src="assets/images/dev/logo-dev.svg" alt="Lovely AW Co developer logo" class="hero-logo" width="84" height="84" />
+        <p class="eyebrow">Independent App &amp; Web Developer</p>
+        <h1 class="hero-title">Crafting Useful Apps<br />and <span class="accent">Web Solutions</span></h1>
+        <p class="hero-sub">
+          I create mobile applications and web platforms focused on education,
+          productivity, accessibility, and everyday convenience.
+        </p>
+        <div class="hero-actions">
+          <a href="#apps" class="btn btn-primary">View Projects</a>
+        </div>
+      </div>
+      <a href="#about" class="scroll-cue" aria-label="Scroll to about section"><span></span></a>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker">01 — About</span>
+          <h2>Practical software, thoughtfully crafted</h2>
+        </div>
+        <div class="about-grid">
+          <div class="about-text reveal">
+            <p>
+              I'm an independent developer building mobile apps and web platforms that
+              solve real, everyday problems. My focus is simple: create practical,
+              user-friendly software that people actually enjoy using.
+            </p>
+            <p>
+              From interactive learning tools for children to productivity utilities and
+              visual web directories, I design each product to be clean, fast, and
+              accessible — built end-to-end from concept and UI/UX through development and release.
+            </p>
+            <p>
+              With experience across <strong>Android mobile development</strong> and
+              modern <strong>web development</strong>, I care about the details that make
+              software feel premium: smooth interactions, clear navigation, and reliable performance.
+            </p>
+            <a href="#services" class="btn btn-outline">See what I offer</a>
+          </div>
+          <ul class="about-cards reveal">
+            <li>
+              <h3>Mobile Platforms</h3>
+              <p>Native Android apps built with Java &amp; Kotlin, designed for real users.</p>
+            </li>
+            <li>
+              <h3>Web Platforms</h3>
+              <p>Responsive, fast web experiences built with modern HTML, CSS &amp; JavaScript.</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FEATURED MOBILE APPS ============ -->
+    <section class="section section-alt" id="apps">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker">02 — Mobile Applications</span>
+          <h2>Mobile Apps</h2>
+          <p class="section-lead">Apps built to make learning and daily life easier.</p>
+        </div>
+
+        <!-- Each .project-card is one slide; copy a block to add another app. -->
+        <div class="apps-carousel" id="appsCarousel">
+        <!-- ===== PROJECT CARD: Cute Tutor ===== -->
+        <article class="project-card reveal">
+          <div class="project-media">
+            <img src="assets/images/cute-tutor/feature.svg" alt="Cute Tutor feature illustration" class="project-feature" loading="lazy" />
+            <div class="project-shots shots-carousel" data-gallery="Cute Tutor">
+              <img src="assets/images/cute-tutor/Screenshot_1.jpeg" alt="Cute Tutor screenshot — home screen" class="screenshot" loading="lazy" />
+              <img src="assets/images/cute-tutor/Screenshot_2.jpeg" alt="Cute Tutor screenshot — learning category" class="screenshot" loading="lazy" />
+              <img src="assets/images/cute-tutor/Screenshot_3.jpeg" alt="Cute Tutor screenshot — quiz game" class="screenshot" loading="lazy" />
+              <img src="assets/images/cute-tutor/Screenshot_4.jpeg" alt="Cute Tutor screenshot — matching activity" class="screenshot" loading="lazy" />
+            </div>
+          </div>
+
+          <div class="project-body">
+            <div class="project-head">
+              <img src="assets/images/cute-tutor/logo.svg" alt="Cute Tutor logo" class="project-logo" loading="lazy" />
+              <div>
+                <h3>Cute Tutor</h3>
+                <span class="tag tag-edu">Education · Kids Learning</span>
+              </div>
+            </div>
+
+            <p class="project-desc">
+              Cute Tutor is a fun and interactive learning application designed for children
+              and early learners. The app combines colorful visuals, animations, voice guidance,
+              educational games, quizzes, and stories to make learning enjoyable.
+            </p>
+
+            <h4 class="mini-title">Learning Categories</h4>
+            <ul class="chips">
+              <li>Alphabets</li><li>Numbers</li><li>Colors</li><li>Shapes</li>
+              <li>Fruits</li><li>Vegetables</li><li>Vehicles</li><li>Birds</li>
+              <li>Animals</li><li>Solar System</li><li>Stories</li><li>Educational Games</li>
+            </ul>
+
+            <h4 class="mini-title">Features</h4>
+            <ul class="feature-list">
+              <li>Text-to-speech voice guidance</li>
+              <li>Interactive animations</li>
+              <li>Learning activities</li>
+              <li>Matching games</li>
+              <li>Puzzle games</li>
+              <li>Mini quizzes</li>
+              <li>Kid-friendly interface</li>
+            </ul>
+
+            <div class="project-actions">
+              <button class="btn btn-primary btn-sm js-view-shots" data-gallery="Cute Tutor">View Screenshots</button>
+              <a href="#" class="btn btn-ghost btn-sm" target="_blank" rel="noopener">Play Store</a>
+              <a href="#" class="btn btn-outline btn-sm">Learn More</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ===== PROJECT CARD: ScheduleMsg ===== -->
+        <article class="project-card project-card-rev reveal">
+          <div class="project-media">
+            <img src="assets/images/schedulemsg/feature.svg" alt="ScheduleMsg feature illustration" class="project-feature" loading="lazy" />
+            <div class="project-shots shots-carousel" data-gallery="ScheduleMsg">
+              <img src="assets/images/schedulemsg/send_msg_later_1.jpeg" alt="ScheduleMsg screenshot — schedule list" class="screenshot" loading="lazy" />
+              <img src="assets/images/schedulemsg/send_msg_later_2.jpeg" alt="ScheduleMsg screenshot — compose message" class="screenshot" loading="lazy" />
+              <img src="assets/images/schedulemsg/send_msg_later_3.jpeg" alt="ScheduleMsg screenshot — platform picker" class="screenshot" loading="lazy" />
+              <img src="assets/images/schedulemsg/send_msg_later_4.jpeg" alt="ScheduleMsg screenshot — reminder alarm" class="screenshot" loading="lazy" />
+            </div>
+          </div>
+
+          <div class="project-body">
+            <div class="project-head">
+              <img src="assets/images/schedulemsg/logo.svg" alt="ScheduleMsg logo" class="project-logo" loading="lazy" />
+              <div>
+                <h3>ScheduleMsg</h3>
+                <span class="tag tag-prod">Productivity · Automation</span>
+              </div>
+            </div>
+
+            <p class="project-desc">
+              ScheduleMsg helps users schedule messages and automatically deliver them at the
+              perfect time. Whether it's a birthday greeting, reminder, follow-up message, or
+              important notification, ScheduleMsg ensures every message reaches the right person
+              at the right moment.
+            </p>
+
+            <h4 class="mini-title">Supported Platforms</h4>
+            <ul class="chips">
+              <li>WhatsApp</li><li>SMS</li><li>Facebook Messenger</li><li>Instagram</li>
+            </ul>
+
+            <h4 class="mini-title">Features</h4>
+            <ul class="feature-list">
+              <li>Message scheduling</li>
+              <li>Auto-send support</li>
+              <li>Exact-time reminders</li>
+              <li>Failure notification alarms</li>
+              <li>Privacy-focused design</li>
+              <li>Local device processing</li>
+              <li>No cloud message storage</li>
+            </ul>
+
+            <div class="project-actions">
+              <button class="btn btn-primary btn-sm js-view-shots" data-gallery="ScheduleMsg">View Screenshots</button>
+              <a href="#" class="btn btn-ghost btn-sm" target="_blank" rel="noopener">Play Store</a>
+              <a href="#" class="btn btn-outline btn-sm">Learn More</a>
+            </div>
+          </div>
+        </article>
+        </div><!-- /.apps-carousel -->
+      </div>
+    </section>
+
+    <!-- ============ FEATURED WEB PROJECTS ============ -->
+    <section class="section" id="web">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker">03 — Web Projects</span>
+          <h2>Web Projects</h2>
+          <p class="section-lead">Web platforms designed for discovery and ease of use.</p>
+        </div>
+
+        <!-- ===== PROJECT CARD: LogoHub ===== -->
+        <article class="project-card reveal">
+          <div class="project-media">
+            <img src="assets/images/logohub/feature.svg" alt="LogoHub feature banner" class="project-feature" loading="lazy" />
+            <div class="project-shots shots-carousel" data-gallery="LogoHub">
+              <img src="assets/images/logohub/aboutimage1.jpg" alt="LogoHub screenshot — logo grid" class="screenshot" loading="lazy" />
+              <img src="assets/images/logohub/aboutimage2.jpg" alt="LogoHub screenshot — company details popup" class="screenshot" loading="lazy" />
+            </div>
+          </div>
+
+          <div class="project-body">
+            <div class="project-head">
+              <img src="assets/images/logohub/logo.svg" alt="LogoHub logo" class="project-logo" loading="lazy" />
+              <div>
+                <h3>LogoHub</h3>
+                <span class="tag tag-web">Web Platform · Directory</span>
+              </div>
+            </div>
+
+            <p class="project-desc">
+              LogoHub is a visual company directory where users can explore businesses through
+              logos. Each company logo appears inside a colored category box. Clicking a logo
+              opens company information and provides direct access to the company's website.
+            </p>
+
+            <h4 class="mini-title">How It Works</h4>
+            <ol class="steps">
+              <li>Browse logo grid</li>
+              <li>Click company logo</li>
+              <li>View company details</li>
+              <li>Visit official website</li>
+            </ol>
+
+            <h4 class="mini-title">Color Categories</h4>
+            <ul class="chips chips-color">
+              <li><span class="dot dot-blue"></span>Blue — Technology</li>
+              <li><span class="dot dot-pink"></span>Pink — Entertainment</li>
+              <li><span class="dot dot-teal"></span>Teal — Healthcare</li>
+              <li><span class="dot dot-green"></span>Green — Food &amp; Travel</li>
+            </ul>
+
+            <h4 class="mini-title">Features</h4>
+            <ul class="feature-list">
+              <li>Logo-based navigation</li>
+              <li>Category color system</li>
+              <li>Company information popup</li>
+              <li>Fast website access</li>
+              <li>Company submission system</li>
+              <li>Responsive design</li>
+            </ul>
+
+            <div class="project-actions">
+              <a href="#" class="btn btn-primary btn-sm" target="_blank" rel="noopener">Visit Website</a>
+              <button class="btn btn-ghost btn-sm js-view-shots" data-gallery="LogoHub">View Gallery</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ FUTURE PROJECTS ============ -->
+    <section class="section section-alt" id="future">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker">04 — What's Next</span>
+          <h2>More Projects Coming Soon</h2>
+          <p class="section-lead">
+            New applications and web platforms are continuously being developed. Future projects
+            will be added here with screenshots, descriptions, features, and download links.
+          </p>
+        </div>
+
+        <div class="future-grid">
+          <!-- Duplicate one .future-card to add an upcoming project. -->
+          <article class="future-card reveal">
+            <div class="future-thumb" aria-hidden="true">＋</div>
+            <h3>Project Slot</h3>
+            <p>A new mobile app is in the works. Details, screenshots, and a download link will appear here.</p>
+            <span class="badge-soon">Coming Soon</span>
+          </article>
+          <article class="future-card reveal">
+            <div class="future-thumb" aria-hidden="true">＋</div>
+            <h3>Project Slot</h3>
+            <p>A new web platform is being designed. Watch this space for the full reveal.</p>
+            <span class="badge-soon">Coming Soon</span>
+          </article>
+          <article class="future-card reveal">
+            <div class="future-thumb" aria-hidden="true">＋</div>
+            <h3>Project Slot</h3>
+            <p>Have an idea worth building? This slot is ready for the next great project.</p>
+            <span class="badge-soon">Coming Soon</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ GALLERY ============ -->
+    <section class="section" id="gallery">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker">05 — Gallery</span>
+          <h2>Project Gallery</h2>
+          <p class="section-lead">App screenshots, website previews, logos, and feature graphics. Click any image to enlarge.</p>
+        </div>
+
+        <div class="gallery-filters reveal" role="tablist" aria-label="Gallery filters">
+          <button class="filter active" data-filter="all">All</button>
+          <button class="filter" data-filter="app">Apps</button>
+          <button class="filter" data-filter="web">Web</button>
+          <button class="filter" data-filter="logo">Logos</button>
+          <button class="filter" data-filter="feature">Graphics</button>
+        </div>
+
+        <div class="gallery-grid reveal" id="galleryGrid">
+          <!-- Items get class for filtering; data-full points to lightbox image. -->
+          <figure class="gallery-item" data-cat="app">
+            <img src="assets/images/cute-tutor/Screenshot_1.jpeg" alt="Cute Tutor home screen" loading="lazy" />
+          </figure>
+          <figure class="gallery-item" data-cat="app">
+            <img src="assets/images/cute-tutor/Screenshot_3.jpeg" alt="Cute Tutor quiz game" loading="lazy" />
+          </figure>
+          <figure class="gallery-item" data-cat="feature">
+            <img src="assets/images/cute-tutor/feature.svg" alt="Cute Tutor feature graphic" loading="lazy" />
+          </figure>
+          <figure class="gallery-item" data-cat="app">
+            <img src="assets/images/schedulemsg/send_msg_later_1.jpeg" alt="ScheduleMsg schedule list" loading="lazy" />
+          </figure>
+          <figure class="gallery-item" data-cat="app">
+            <img src="assets/images/schedulemsg/send_msg_later_2.jpeg" alt="ScheduleMsg compose message" loading="lazy" />
+          </figure>
+          <figure class="gallery-item" data-cat="feature">
+            <img src="assets/images/schedulemsg/feature.svg" alt="ScheduleMsg feature graphic" loading="lazy" />
+          </figure>
+          <figure class="gallery-item" data-cat="web">
+            <img src="assets/images/logohub/shot1.svg" alt="LogoHub logo grid" loading="lazy" />
+          </figure>
+          <figure class="gallery-item" data-cat="web">
+            <img src="assets/images/logohub/shot2.svg" alt="LogoHub company details" loading="lazy" />
+          </figure>
+          <figure class="gallery-item" data-cat="feature">
+            <img src="assets/images/logohub/feature.svg" alt="LogoHub feature banner" loading="lazy" />
+          </figure>
+          <figure class="gallery-item" data-cat="logo">
+            <img src="assets/images/cute-tutor/logo.svg" alt="Cute Tutor logo" loading="lazy" />
+          </figure>
+          <figure class="gallery-item" data-cat="logo">
+            <img src="assets/images/schedulemsg/logo.svg" alt="ScheduleMsg logo" loading="lazy" />
+          </figure>
+          <figure class="gallery-item" data-cat="logo">
+            <img src="assets/images/logohub/logo.svg" alt="LogoHub logo" loading="lazy" />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SKILLS ============ -->
+    <section class="section section-alt" id="skills">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker">06 — Skills</span>
+          <h2>Tools &amp; Technologies</h2>
+        </div>
+        <ul class="skills-grid reveal">
+          <li class="skill"><span class="skill-ico">🤖</span>Android Development</li>
+          <li class="skill"><span class="skill-ico">☕</span>Java</li>
+          <li class="skill"><span class="skill-ico">🌐</span>HTML</li>
+          <li class="skill"><span class="skill-ico">🎨</span>CSS</li>
+          <li class="skill"><span class="skill-ico">⚡</span>JavaScript</li>
+          <li class="skill"><span class="skill-ico">✨</span>UI/UX Design</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ MY SERVICES ============ -->
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker">07 — Services</span>
+          <h2>My Services</h2>
+          <p class="section-lead">The apps and platforms I build and offer.</p>
+        </div>
+
+        <ul class="services-grid reveal">
+          <!-- Duplicate one .service-card to add another product. -->
+          <li class="service-card">
+            <img src="assets/images/cute-tutor/logo.svg" alt="Cute Tutor logo" class="service-logo" loading="lazy" />
+            <h3>Cute Tutor</h3>
+            <span class="service-tag">Mobile App · Kids Learning</span>
+            <p>A fun, interactive learning app for children — alphabets, numbers, animals, games, quizzes, and stories with voice guidance.</p>
+            <a href="#apps" class="btn btn-outline btn-sm">View App</a>
+          </li>
+          <li class="service-card">
+            <img src="assets/images/schedulemsg/logo.svg" alt="ScheduleMsg logo" class="service-logo" loading="lazy" />
+            <h3>ScheduleMsg</h3>
+            <span class="service-tag">Mobile App · Productivity</span>
+            <p>Schedule messages and send them automatically at the perfect time — across WhatsApp, SMS, Messenger, and Instagram.</p>
+            <a href="#apps" class="btn btn-outline btn-sm">View App</a>
+          </li>
+          <li class="service-card">
+            <img src="assets/images/logohub/logo.svg" alt="LogoHub logo" class="service-logo" loading="lazy" />
+            <h3>LogoHub</h3>
+            <span class="service-tag">Web Platform · Directory</span>
+            <p>A visual company directory where you explore businesses through logos, view details, and jump straight to their websites.</p>
+            <a href="#web" class="btn btn-outline btn-sm">View Project</a>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="assets/images/dev/logo-dev.svg" alt="Lovely AW Co logo" width="36" height="36" />
+        <span class="brand-name">Lovely AW <span class="accent">Co</span></span>
+        <p>Building useful apps and web solutions.</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Footer">
+        <h4>Explore</h4>
+        <a href="#about">About</a>
+        <a href="#apps">Apps</a>
+        <a href="#web">Web</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#services">Services</a>
+      </nav>
+
+      <div class="footer-social">
+        <h4>Connect</h4>
+        <div class="social-icons">
+          <a href="mailto:logos.links.2025@gmail.com" aria-label="Email" class="social">✉</a>
+          <a href="#" aria-label="GitHub" target="_blank" rel="noopener" class="social">⌨</a>
+          <a href="#" aria-label="LinkedIn" target="_blank" rel="noopener" class="social">in</a>
+          <a href="#" aria-label="Play Store" target="_blank" rel="noopener" class="social">▶</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="year"></span> Lovely AW Co. All rights reserved.</p>
+      <p>Designed &amp; built with care.</p>
+    </div>
+  </footer>
+
+  <!-- ============ LIGHTBOX ============ -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" hidden>
+    <button class="lb-close" id="lbClose" aria-label="Close viewer">&times;</button>
+    <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous image">&#8249;</button>
+    <figure class="lb-figure">
+      <img src="" alt="" id="lbImg" />
+      <figcaption id="lbCaption"></figcaption>
+    </figure>
+    <button class="lb-nav lb-next" id="lbNext" aria-label="Next image">&#8250;</button>
+  </div>
+
+  <button class="to-top" id="toTop" aria-label="Back to top" hidden>↑</button>
+
+  <script src="js/script.js" defer></script>
+</body>
+</html>
