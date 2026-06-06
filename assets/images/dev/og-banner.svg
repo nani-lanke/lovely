@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-label="Lovely AW Co feature graphic">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e8c766"/><stop offset="1" stop-color="#b8902a"/></linearGradient>
+    <radialGradient id="r" cx="0.5" cy="0.3" r="0.8"><stop offset="0" stop-color="#e8c766" stop-opacity="0.35"/><stop offset="1" stop-color="#0b0b0f" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1280" height="720" fill="#0c0c10"/>
+  <rect width="1280" height="720" fill="url(#r)"/>
+  <circle cx="1050" cy="200" r="240" fill="url(#g)" opacity="0.14"/>
+  <circle cx="1050" cy="200" r="160" fill="none" stroke="url(#g)" stroke-width="2" opacity="0.5"/>
+  <text x="90" y="350" font-family="Georgia, serif" font-size="96" font-weight="800" fill="url(#g)">Lovely AW Co</text>
+  <text x="96" y="410" font-family="Segoe UI, sans-serif" font-size="32" fill="#9a978f">App and Web Developer</text>
+  <rect x="96" y="460" width="180" height="8" rx="4" fill="url(#g)"/>
+</svg>
