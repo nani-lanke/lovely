@@ -233,7 +233,7 @@
 
       cards.forEach((card, i) => {
         const name = (card.querySelector(".project-head h3")?.textContent || "App " + (i + 1)).trim();
-        const feat = card.querySelector(".project-feature")?.getAttribute("src") || "";
+        const feat = card.dataset.thumb || card.querySelector(".project-feature")?.getAttribute("src") || "";
         const b = document.createElement("button");
         b.type = "button";
         b.innerHTML = `<img class="apps-dot-thumb" src="${feat}" alt="" aria-hidden="true"><span class="apps-dot-name">${name}</span>`;
@@ -263,6 +263,65 @@
       window.addEventListener("resize", setActiveApp);
     }
   }
+
+  /* ---------- Horizontal scroll rows (Future + Services) ---------- */
+  $$(".future-grid, .services-grid").forEach((row) => {
+    // Cards parked off-screen to the right never trip the reveal observer; show them.
+    $$(".reveal", row).forEach((c) => c.classList.add("in"));
+
+    // Mouse wheel → horizontal scroll (only when there's overflow to scroll).
+    row.addEventListener(
+      "wheel",
+      (e) => {
+        const canScroll = row.scrollWidth > row.clientWidth;
+        if (!canScroll) return;
+        // Honour an explicit horizontal gesture (trackpad); otherwise map vertical wheel to horizontal.
+        const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+        const atStart = row.scrollLeft <= 0;
+        const atEnd = row.scrollLeft + row.clientWidth >= row.scrollWidth - 1;
+        // Let the page scroll normally when we're at an edge and pushing further out.
+        if ((delta < 0 && atStart) || (delta > 0 && atEnd)) return;
+        e.preventDefault();
+        row.scrollLeft += delta;
+      },
+      { passive: false }
+    );
+
+    // Click-and-drag to scroll (desktop). Touch swipe is native.
+    let down = false, startX = 0, startLeft = 0, moved = 0;
+    row.addEventListener("pointerdown", (e) => {
+      if (e.pointerType !== "mouse") return; // touch/pen use native scrolling
+      down = true; moved = 0;
+      startX = e.clientX; startLeft = row.scrollLeft;
+    });
+    row.addEventListener("pointermove", (e) => {
+      if (!down) return;
+      const dx = e.clientX - startX;
+      moved += Math.abs(dx);
+      if (moved > 5 && !row.classList.contains("dragging")) {
+        row.classList.add("dragging");
+        row.setPointerCapture(e.pointerId);
+      }
+      if (row.classList.contains("dragging")) row.scrollLeft = startLeft - dx;
+    });
+    const endDrag = () => {
+      down = false;
+      row.classList.remove("dragging");
+    };
+    row.addEventListener("pointerup", endDrag);
+    row.addEventListener("pointercancel", endDrag);
+    // Swallow the click that follows a drag so cards/links don't fire.
+    row.addEventListener(
+      "click",
+      (e) => {
+        if (moved > 5) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      },
+      true
+    );
+  });
 
   /* ---------- Back to top ---------- */
   const toTop = $("#toTop");
