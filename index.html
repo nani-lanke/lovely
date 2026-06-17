@@ -138,7 +138,7 @@
         <!-- Each .project-card is one slide; copy a block to add another app. -->
         <div class="apps-carousel" id="appsCarousel">
         <!-- ===== PROJECT CARD: Cute Tutor ===== -->
-        <article class="project-card reveal">
+        <article class="project-card reveal" data-thumb="assets/images/cute-tutor/cute_tutor.png">
           <div class="project-media">
             <img src="assets/images/cute-tutor/feature.svg" alt="Cute Tutor feature illustration" class="project-feature" loading="lazy" />
             <div class="project-shots shots-carousel" data-gallery="Cute Tutor">
@@ -191,7 +191,7 @@
         </article>
 
         <!-- ===== PROJECT CARD: ScheduleMsg ===== -->
-        <article class="project-card project-card-rev reveal">
+        <article class="project-card project-card-rev reveal" data-thumb="assets/images/schedulemsg/schedule_msg.png">
           <div class="project-media">
             <img src="assets/images/schedulemsg/feature.svg" alt="ScheduleMsg feature illustration" class="project-feature" loading="lazy" />
             <div class="project-shots shots-carousel" data-gallery="ScheduleMsg">
@@ -319,7 +319,7 @@
       <div class="container">
         <div class="section-head reveal">
           <span class="kicker">04 — What's Next</span>
-          <h2>More Projects Coming Soon</h2>
+          <h2>More Projects</h2>
           <p class="section-lead">
             New applications and web platforms are continuously being developed. Future projects
             will be added here with screenshots, descriptions, features, and download links.
@@ -328,22 +328,59 @@
 
         <div class="future-grid">
           <!-- Duplicate one .future-card to add an upcoming project. -->
-          <article class="future-card reveal">
-            <div class="future-thumb" aria-hidden="true">＋</div>
-            <h3>Project Slot</h3>
-            <p>A new mobile app is in the works. Details, screenshots, and a download link will appear here.</p>
+          <article class="future-card future-card--youtube reveal">
+            <div class="future-glow" aria-hidden="true"></div>
+            <div class="future-thumb future-thumb--youtube" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor" aria-hidden="true">
+                <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/>
+              </svg>
+            </div>
+            <h3>Kids Story YouTube Channel</h3>
+            <p>Educational and entertaining stories that spark imagination in young minds.</p>
+            <ul class="future-feats">
+              <li>Moral stories, bedtime stories &amp; learning videos</li>
+              <li>Fun, engaging content for kids of all ages</li>
+              <li>Safe and wholesome storytelling</li>
+            </ul>
             <span class="badge-soon">Coming Soon</span>
           </article>
-          <article class="future-card reveal">
-            <div class="future-thumb" aria-hidden="true">＋</div>
-            <h3>Project Slot</h3>
-            <p>A new web platform is being designed. Watch this space for the full reveal.</p>
+
+          <article class="future-card future-card--instagram reveal">
+            <div class="future-glow" aria-hidden="true"></div>
+            <div class="future-thumb future-thumb--instagram" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/>
+                <circle cx="12" cy="12" r="4.2"/>
+                <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/>
+              </svg>
+            </div>
+            <h3>Drawing &amp; Art Instagram</h3>
+            <p>A creative space sharing original artwork and approachable art tutorials.</p>
+            <ul class="future-feats">
+              <li>Creative drawing &amp; original illustrations</li>
+              <li>Sketching and coloring ideas</li>
+              <li>Line-drawing &amp; sketch walkthroughs</li>
+            </ul>
             <span class="badge-soon">Coming Soon</span>
           </article>
-          <article class="future-card reveal">
-            <div class="future-thumb" aria-hidden="true">＋</div>
-            <h3>Project Slot</h3>
-            <p>Have an idea worth building? This slot is ready for the next great project.</p>
+
+          <article class="future-card future-card--tech reveal">
+            <div class="future-glow" aria-hidden="true"></div>
+            <div class="future-thumb future-thumb--tech" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m8 8-4 4 4 4"/>
+                <path d="m16 8 4 4-4 4"/>
+                <path d="m13.5 6-3 12"/>
+              </svg>
+            </div>
+            <h3>Technology Learning Platform</h3>
+            <p>A guided path to learn programming and technology skills from scratch.</p>
+            <ul class="future-feats">
+              <li>Roadmaps for Java, Python, HTML, CSS, JS &amp; AI</li>
+              <li>Interactive learning paths &amp; detailed notes</li>
+              <li>Quizzes, projects &amp; career guidance</li>
+              <li>Beginner-to-expert education</li>
+            </ul>
             <span class="badge-soon">Coming Soon</span>
           </article>
         </div>
@@ -459,7 +496,71 @@
             <p>A visual company directory where you explore businesses through logos, view details, and jump straight to their websites.</p>
             <a href="#web" class="btn btn-outline btn-sm">View Project</a>
           </li>
+          <li class="service-card service-card--youtube">
+            <div class="service-logo service-logo--icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" aria-hidden="true">
+                <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/>
+              </svg>
+            </div>
+            <h3>Kids Story Channel</h3>
+            <span class="service-tag">YouTube · Kids Content</span>
+            <p>Educational and entertaining stories for children — moral tales, bedtime stories, and learning videos for all ages.</p>
+            <a href="#future" class="btn btn-outline btn-sm">Learn More</a>
+          </li>
+          <li class="service-card service-card--instagram">
+            <div class="service-logo service-logo--icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/>
+                <circle cx="12" cy="12" r="4.2"/>
+                <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/>
+              </svg>
+            </div>
+            <h3>Drawing &amp; Art</h3>
+            <span class="service-tag">Instagram · Creative Art</span>
+            <p>Original drawing, sketching and coloring ideas, plus line-drawing walkthroughs shared with a growing creative community.</p>
+            <a href="#future" class="btn btn-outline btn-sm">Learn More</a>
+          </li>
+          <li class="service-card service-card--tech">
+            <div class="service-logo service-logo--icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m8 8-4 4 4 4"/>
+                <path d="m16 8 4 4-4 4"/>
+                <path d="m13.5 6-3 12"/>
+              </svg>
+            </div>
+            <h3>Tech Learning Platform</h3>
+            <span class="service-tag">Web Platform · Education</span>
+            <p>Learn programming with roadmaps for Java, Python, HTML, CSS, JS &amp; AI — interactive paths, notes, quizzes, projects, and career guidance.</p>
+            <a href="#future" class="btn btn-outline btn-sm">Learn More</a>
+          </li>
         </ul>
+      </div>
+    </section>
+
+    <!-- ============ CLIENT WORK ============ -->
+    <section class="section" id="client-work">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker">09 — Client Work</span>
+          <h2>Websites Crafted for Clients &amp; Friends</h2>
+          <p class="section-lead">A page I designed and built for a friend — one of the custom websites I create for people.</p>
+        </div>
+
+        <div class="support-wrap reveal">
+          <!-- TODO: replace NAME, LINK and DESCRIPTION below with the real details. -->
+          <article class="service-card service-card--client support-card">
+            <div class="service-logo service-logo--icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="9.2"/>
+                <path d="M3 12h18M12 2.8c2.6 2.5 4 5.8 4 9.2s-1.4 6.7-4 9.2c-2.6-2.5-4-5.8-4-9.2s1.4-6.7 4-9.2Z"/>
+              </svg>
+            </div>
+            <h3>Friend's Website</h3>
+            <span class="service-tag">Client Project · Website</span>
+            <p>A custom website I designed and built for a friend. <!-- Replace with a short description of the page. --></p>
+            <a href="#" target="_blank" rel="noopener" class="btn btn-outline btn-sm">Visit Site</a>
+          </article>
+        </div>
       </div>
     </section>
   </main>
@@ -480,6 +581,7 @@
         <a href="#web">Web</a>
         <a href="#gallery">Gallery</a>
         <a href="#services">Services</a>
+        <a href="#client-work">Client Work</a>
       </nav>
 
       <div class="footer-social">
