@@ -1,109 +1,333 @@
-# Generates elegant SVG placeholder images for the portfolio.
-# Replace any generated file with your real artwork (keep the same filename/path).
-$base = Join-Path $PSScriptRoot "images"
+/* =========================================================
+   Logos Links — Portfolio interactions
+   Nav · reveal-on-scroll · gallery filter · lightbox · back-to-top
+   ========================================================= */
+(function () {
+  "use strict";
 
-function Save-Svg($path, $content) {
-  $full = Join-Path $base $path
-  New-Item -ItemType Directory -Force -Path (Split-Path $full) | Out-Null
-  [System.IO.File]::WriteAllText($full, $content, (New-Object System.Text.UTF8Encoding($false)))
-}
+  const $ = (sel, ctx = document) => ctx.querySelector(sel);
+  const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
 
-# ---------- Logo (square monogram) ----------
-function Logo($mono, $c1, $c2) {
-@"
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="$mono logo">
-  <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="$c1"/><stop offset="1" stop-color="$c2"/>
-    </linearGradient>
-  </defs>
-  <rect width="200" height="200" rx="44" fill="#0e0e12"/>
-  <rect x="6" y="6" width="188" height="188" rx="40" fill="url(#g)" opacity="0.18"/>
-  <rect x="6" y="6" width="188" height="188" rx="40" fill="none" stroke="url(#g)" stroke-width="2"/>
-  <text x="100" y="132" font-family="Georgia, serif" font-size="96" font-weight="700"
-        text-anchor="middle" fill="url(#g)">$mono</text>
-</svg>
-"@
-}
+  /* ---------- Year ---------- */
+  const yearEl = $("#year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-# ---------- Phone screenshot (9:16) ----------
-function Shot($title, $c1, $c2, $kind) {
-  $blocks = ""
-  if ($kind -eq "grid") {
-    for ($r=0; $r -lt 3; $r++) { for ($c=0; $c -lt 2; $c++) {
-      $x = 70 + $c*180; $y = 280 + $r*200
-      $blocks += "<rect x='$x' y='$y' width='150' height='160' rx='18' fill='url(#g)' opacity='0.16'/><rect x='$x' y='$y' width='150' height='160' rx='18' fill='none' stroke='url(#g)' stroke-width='1.5' opacity='0.5'/>"
-    }}
-  } elseif ($kind -eq "list") {
-    for ($i=0; $i -lt 5; $i++) {
-      $y = 280 + $i*150
-      $blocks += "<rect x='70' y='$y' width='340' height='118' rx='16' fill='#16161c'/><circle cx='128' cy='$($y+59)' r='30' fill='url(#g)' opacity='0.55'/><rect x='178' y='$($y+34)' width='180' height='14' rx='7' fill='#2a2a32'/><rect x='178' y='$($y+62)' width='120' height='12' rx='6' fill='#222229'/>"
-    }
-  } else {
-    $blocks = "<circle cx='240' cy='430' r='120' fill='url(#g)' opacity='0.2'/><circle cx='240' cy='430' r='120' fill='none' stroke='url(#g)' stroke-width='2'/><rect x='110' y='640' width='260' height='18' rx='9' fill='#2a2a32'/><rect x='150' y='678' width='180' height='14' rx='7' fill='#222229'/>"
+  /* ---------- Navbar scroll state ---------- */
+  const navbar = $("#navbar");
+  const onScroll = () => {
+    navbar.classList.toggle("scrolled", window.scrollY > 30);
+    toTop.hidden = window.scrollY < 600;
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+
+  /* ---------- Mobile nav toggle ---------- */
+  const navToggle = $("#navToggle");
+  const navLinks = $("#navLinks");
+  const closeNav = () => {
+    navLinks.classList.remove("open");
+    navToggle.classList.remove("open");
+    navToggle.setAttribute("aria-expanded", "false");
+  };
+  navToggle.addEventListener("click", () => {
+    const open = navLinks.classList.toggle("open");
+    navToggle.classList.toggle("open", open);
+    navToggle.setAttribute("aria-expanded", String(open));
+  });
+  $$("#navLinks a").forEach((a) => a.addEventListener("click", closeNav));
+
+  /* ---------- Active section highlight ---------- */
+  const sections = $$("main section[id]");
+  const navAnchors = $$("#navLinks a");
+  const spy = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          const id = e.target.id;
+          navAnchors.forEach((a) =>
+            a.classList.toggle("active", a.getAttribute("href") === "#" + id)
+          );
+        }
+      });
+    },
+    { rootMargin: "-45% 0px -50% 0px" }
+  );
+  sections.forEach((s) => spy.observe(s));
+
+  /* ---------- Reveal on scroll ---------- */
+  const revealItems = $$(".reveal");
+  const revealObs = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("in");
+          obs.unobserve(e.target);
+        }
+      });
+    },
+    { threshold: 0.12 }
+  );
+  revealItems.forEach((el) => revealObs.observe(el));
+
+  /* ---------- Gallery filter ---------- */
+  const filters = $$(".filter");
+  const galleryItems = $$(".gallery-item");
+  filters.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      filters.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      const cat = btn.dataset.filter;
+      galleryItems.forEach((item) => {
+        const show = cat === "all" || item.dataset.cat === cat;
+        item.classList.toggle("hide", !show);
+      });
+    });
+  });
+
+  /* ---------- Lightbox ---------- */
+  const lightbox = $("#lightbox");
+  const lbImg = $("#lbImg");
+  const lbCaption = $("#lbCaption");
+  const lbClose = $("#lbClose");
+  const lbPrev = $("#lbPrev");
+  const lbNext = $("#lbNext");
+
+  let group = []; // current array of {src, caption}
+  let index = 0;
+  let lastFocus = null;
+
+  function buildGroupFrom(imgs) {
+    return imgs.map((img) => ({
+      src: img.getAttribute("src"),
+      caption: img.getAttribute("alt") || "",
+    }));
   }
-@"
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 854" role="img" aria-label="$title screenshot">
-  <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="$c1"/><stop offset="1" stop-color="$c2"/></linearGradient>
-    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#101015"/><stop offset="1" stop-color="#0b0b0f"/></linearGradient>
-  </defs>
-  <rect width="480" height="854" fill="url(#bg)"/>
-  <rect x="0" y="0" width="480" height="150" fill="url(#g)" opacity="0.12"/>
-  <rect x="190" y="34" width="100" height="8" rx="4" fill="#3a3a44"/>
-  <text x="40" y="118" font-family="Georgia, serif" font-size="40" font-weight="700" fill="url(#g)">$title</text>
-  $blocks
-  <rect x="0" y="780" width="480" height="74" fill="#0d0d12"/>
-  <circle cx="120" cy="817" r="9" fill="url(#g)"/><circle cx="240" cy="817" r="9" fill="#2a2a32"/><circle cx="360" cy="817" r="9" fill="#2a2a32"/>
-</svg>
-"@
-}
 
-# ---------- Feature banner (16:9) ----------
-function Feature($title, $sub, $c1, $c2) {
-@"
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-label="$title feature graphic">
-  <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="$c1"/><stop offset="1" stop-color="$c2"/></linearGradient>
-    <radialGradient id="r" cx="0.5" cy="0.3" r="0.8"><stop offset="0" stop-color="$c1" stop-opacity="0.35"/><stop offset="1" stop-color="#0b0b0f" stop-opacity="0"/></radialGradient>
-  </defs>
-  <rect width="1280" height="720" fill="#0c0c10"/>
-  <rect width="1280" height="720" fill="url(#r)"/>
-  <circle cx="1050" cy="200" r="240" fill="url(#g)" opacity="0.14"/>
-  <circle cx="1050" cy="200" r="160" fill="none" stroke="url(#g)" stroke-width="2" opacity="0.5"/>
-  <text x="90" y="350" font-family="Georgia, serif" font-size="96" font-weight="800" fill="url(#g)">$title</text>
-  <text x="96" y="410" font-family="Segoe UI, sans-serif" font-size="32" fill="#9a978f">$sub</text>
-  <rect x="96" y="460" width="180" height="8" rx="4" fill="url(#g)"/>
-</svg>
-"@
-}
+  function openLightbox(list, startIndex, trigger) {
+    group = list;
+    index = startIndex;
+    lastFocus = trigger || document.activeElement;
+    render();
+    lightbox.hidden = false;
+    document.body.style.overflow = "hidden";
+    lbClose.focus();
+  }
 
-# ===== Developer brand =====
-Save-Svg "dev/logo-dev.svg" (Logo "AW" "#e8c766" "#b8902a")
-Save-Svg "dev/favicon.svg" (Logo "AW" "#e8c766" "#b8902a")
-Save-Svg "dev/og-banner.svg" (Feature "Lovely AW Co" "App and Web Developer" "#e8c766" "#b8902a")
+  function render() {
+    const item = group[index];
+    if (!item) return;
+    lbImg.setAttribute("src", item.src);
+    lbImg.setAttribute("alt", item.caption);
+    lbCaption.textContent = item.caption;
+    const multi = group.length > 1;
+    lbPrev.style.display = multi ? "" : "none";
+    lbNext.style.display = multi ? "" : "none";
+  }
 
-# ===== Cute Tutor (playful pink/gold) =====
-Save-Svg "cute-tutor/logo.svg" (Logo "CT" "#f6a8c8" "#d4af37")
-Save-Svg "cute-tutor/feature.svg" (Feature "Cute Tutor" "Fun, interactive learning for kids" "#f6a8c8" "#e8c766")
-Save-Svg "cute-tutor/shot1.svg" (Shot "Cute Tutor" "#f6a8c8" "#d4af37" "grid")
-Save-Svg "cute-tutor/shot2.svg" (Shot "Categories" "#f6a8c8" "#d4af37" "grid")
-Save-Svg "cute-tutor/shot3.svg" (Shot "Quiz" "#f6a8c8" "#d4af37" "hero")
-Save-Svg "cute-tutor/shot4.svg" (Shot "Matching" "#f6a8c8" "#d4af37" "grid")
+  function closeLightbox() {
+    lightbox.hidden = true;
+    document.body.style.overflow = "";
+    if (lastFocus) lastFocus.focus();
+  }
+  const step = (dir) => {
+    index = (index + dir + group.length) % group.length;
+    render();
+  };
 
-# ===== ScheduleMsg (teal/gold) =====
-Save-Svg "schedulemsg/logo.svg" (Logo "SM" "#8fd6c0" "#d4af37")
-Save-Svg "schedulemsg/feature.svg" (Feature "ScheduleMsg" "Send the right message at the right time" "#8fd6c0" "#e8c766")
-Save-Svg "schedulemsg/shot1.svg" (Shot "Scheduled" "#8fd6c0" "#d4af37" "list")
-Save-Svg "schedulemsg/shot2.svg" (Shot "Compose" "#8fd6c0" "#d4af37" "hero")
-Save-Svg "schedulemsg/shot3.svg" (Shot "Platforms" "#8fd6c0" "#d4af37" "grid")
-Save-Svg "schedulemsg/shot4.svg" (Shot "Reminder" "#8fd6c0" "#d4af37" "hero")
+  // Gallery grid → lightbox (uses currently visible items)
+  galleryItems.forEach((fig) => {
+    fig.addEventListener("click", () => {
+      const visible = galleryItems.filter((i) => !i.classList.contains("hide"));
+      const imgs = visible.map((i) => $("img", i));
+      const list = buildGroupFrom(imgs);
+      const startImg = $("img", fig);
+      const start = imgs.indexOf(startImg);
+      openLightbox(list, Math.max(0, start), fig);
+    });
+  });
 
-# ===== LogoHub (blue/gold) =====
-Save-Svg "logohub/logo.svg" (Logo "LH" "#8fb8f0" "#d4af37")
-Save-Svg "logohub/feature.svg" (Feature "LogoHub" "Explore businesses through logos" "#8fb8f0" "#e8c766")
-Save-Svg "logohub/shot1.svg" (Shot "Logo Grid" "#8fb8f0" "#d4af37" "grid")
-Save-Svg "logohub/shot2.svg" (Shot "Details" "#8fb8f0" "#d4af37" "hero")
-Save-Svg "logohub/shot3.svg" (Shot "Categories" "#8fb8f0" "#d4af37" "grid")
+  // Project screenshot thumbnails → lightbox (scoped to that app's set)
+  $$(".project-shots").forEach((wrap) => {
+    const imgs = $$("img.screenshot", wrap);
+    imgs.forEach((img, i) => {
+      img.addEventListener("click", () =>
+        openLightbox(buildGroupFrom(imgs), i, img)
+      );
+    });
+  });
 
-Write-Host "Done. Generated SVG placeholders under $base"
+  // "View Screenshots" / "View Gallery" buttons → open that app's set
+  $$(".js-view-shots").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const name = btn.dataset.gallery;
+      const wrap = $(`.project-shots[data-gallery="${CSS.escape(name)}"]`);
+      if (!wrap) return;
+      const imgs = $$("img.screenshot", wrap);
+      openLightbox(buildGroupFrom(imgs), 0, btn);
+    });
+  });
+
+  lbClose.addEventListener("click", closeLightbox);
+  lbPrev.addEventListener("click", () => step(-1));
+  lbNext.addEventListener("click", () => step(1));
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (lightbox.hidden) return;
+    if (e.key === "Escape") closeLightbox();
+    else if (e.key === "ArrowLeft") step(-1);
+    else if (e.key === "ArrowRight") step(1);
+  });
+
+  /* ---------- App screenshot carousels (dots) ---------- */
+  $$(".shots-carousel").forEach((car) => {
+    const slides = $$("img.screenshot", car);
+    if (slides.length < 2) return;
+
+    // Build dot indicators
+    const dots = document.createElement("div");
+    dots.className = "shots-dots";
+    dots.setAttribute("role", "tablist");
+    dots.setAttribute("aria-label", "Screenshot navigation");
+    slides.forEach((_, i) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.setAttribute("aria-label", "Go to screenshot " + (i + 1));
+      if (i === 0) b.classList.add("active");
+      b.addEventListener("click", () =>
+        car.scrollTo({ left: i * car.clientWidth, behavior: "smooth" })
+      );
+      dots.appendChild(b);
+    });
+    car.insertAdjacentElement("afterend", dots);
+    const dotBtns = Array.from(dots.children);
+
+    const setActive = () => {
+      const i = Math.round(car.scrollLeft / car.clientWidth);
+      dotBtns.forEach((d, n) => d.classList.toggle("active", n === i));
+    };
+    let raf;
+    car.addEventListener(
+      "scroll",
+      () => {
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(setActive);
+      },
+      { passive: true }
+    );
+    window.addEventListener("resize", setActive);
+  });
+
+  /* ---------- App projects carousel (numbered dots) ---------- */
+  const appsCar = $("#appsCarousel");
+  if (appsCar) {
+    const cards = $$(":scope > .project-card", appsCar);
+    // Off-screen slides never trigger the scroll-reveal observer, so show them directly.
+    cards.forEach((c) => c.classList.add("in"));
+    if (cards.length > 1) {
+      const ord = ["1st", "2nd", "3rd", "4th", "5th", "6th"];
+      const dots = document.createElement("div");
+      dots.className = "apps-dots";
+      dots.setAttribute("role", "tablist");
+      dots.setAttribute("aria-label", "App projects");
+
+      cards.forEach((card, i) => {
+        const name = (card.querySelector(".project-head h3")?.textContent || "App " + (i + 1)).trim();
+        const feat = card.dataset.thumb || card.querySelector(".project-feature")?.getAttribute("src") || "";
+        const b = document.createElement("button");
+        b.type = "button";
+        b.innerHTML = `<img class="apps-dot-thumb" src="${feat}" alt="" aria-hidden="true"><span class="apps-dot-name">${name}</span>`;
+        b.setAttribute("aria-label", `${ord[i] || i + 1} project: ${name}`);
+        if (i === 0) b.classList.add("active");
+        b.addEventListener("click", () =>
+          appsCar.scrollTo({ left: i * appsCar.clientWidth, behavior: "smooth" })
+        );
+        dots.appendChild(b);
+      });
+      appsCar.insertAdjacentElement("beforebegin", dots);
+      const dotBtns = Array.from(dots.children);
+
+      const setActiveApp = () => {
+        const i = Math.round(appsCar.scrollLeft / appsCar.clientWidth);
+        dotBtns.forEach((d, n) => d.classList.toggle("active", n === i));
+      };
+      let rafA;
+      appsCar.addEventListener(
+        "scroll",
+        () => {
+          cancelAnimationFrame(rafA);
+          rafA = requestAnimationFrame(setActiveApp);
+        },
+        { passive: true }
+      );
+      window.addEventListener("resize", setActiveApp);
+    }
+  }
+
+  /* ---------- Horizontal scroll rows (Future + Services) ---------- */
+  $$(".future-grid, .services-grid").forEach((row) => {
+    // Cards parked off-screen to the right never trip the reveal observer; show them.
+    $$(".reveal", row).forEach((c) => c.classList.add("in"));
+
+    // Mouse wheel → horizontal scroll (only when there's overflow to scroll).
+    row.addEventListener(
+      "wheel",
+      (e) => {
+        const canScroll = row.scrollWidth > row.clientWidth;
+        if (!canScroll) return;
+        // Honour an explicit horizontal gesture (trackpad); otherwise map vertical wheel to horizontal.
+        const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+        const atStart = row.scrollLeft <= 0;
+        const atEnd = row.scrollLeft + row.clientWidth >= row.scrollWidth - 1;
+        // Let the page scroll normally when we're at an edge and pushing further out.
+        if ((delta < 0 && atStart) || (delta > 0 && atEnd)) return;
+        e.preventDefault();
+        row.scrollLeft += delta;
+      },
+      { passive: false }
+    );
+
+    // Click-and-drag to scroll (desktop). Touch swipe is native.
+    let down = false, startX = 0, startLeft = 0, moved = 0;
+    row.addEventListener("pointerdown", (e) => {
+      if (e.pointerType !== "mouse") return; // touch/pen use native scrolling
+      down = true; moved = 0;
+      startX = e.clientX; startLeft = row.scrollLeft;
+    });
+    row.addEventListener("pointermove", (e) => {
+      if (!down) return;
+      const dx = e.clientX - startX;
+      moved += Math.abs(dx);
+      if (moved > 5 && !row.classList.contains("dragging")) {
+        row.classList.add("dragging");
+        row.setPointerCapture(e.pointerId);
+      }
+      if (row.classList.contains("dragging")) row.scrollLeft = startLeft - dx;
+    });
+    const endDrag = () => {
+      down = false;
+      row.classList.remove("dragging");
+    };
+    row.addEventListener("pointerup", endDrag);
+    row.addEventListener("pointercancel", endDrag);
+    // Swallow the click that follows a drag so cards/links don't fire.
+    row.addEventListener(
+      "click",
+      (e) => {
+        if (moved > 5) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      },
+      true
+    );
+  });
+
+  /* ---------- Back to top ---------- */
+  const toTop = $("#toTop");
+  toTop.addEventListener("click", () =>
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  );
+
+  onScroll();
+})();
