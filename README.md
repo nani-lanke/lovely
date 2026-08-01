@@ -62,7 +62,7 @@ Future-project placeholders live in the `#future` section — duplicate a
   and the JSON-LD block — search & replace to rename.
 - **Links:** Play Store, "Learn More", "Visit Website", website URL, and social
   links are `href="#"` placeholders — fill them in.
-- **Email** is already set to `logos.links.2025@gmail.com`.
+- **Email** is already set to `help.lovelyaz@gmail.com`.
 
 ## Notes
 
