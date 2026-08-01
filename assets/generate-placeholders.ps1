@@ -81,7 +81,7 @@ function Feature($title, $sub, $c1, $c2) {
 # ===== Developer brand =====
 Save-Svg "dev/logo-dev.svg" (Logo "AW" "#e8c766" "#b8902a")
 Save-Svg "dev/favicon.svg" (Logo "AW" "#e8c766" "#b8902a")
-Save-Svg "dev/og-banner.svg" (Feature "Lovely AW Co" "App and Web Developer" "#e8c766" "#b8902a")
+Save-Svg "dev/og-banner.svg" (Feature "Lovely AZ Co" "App and Web Developer" "#e8c766" "#b8902a")
 
 # ===== Cute Tutor (playful pink/gold) =====
 Save-Svg "cute-tutor/logo.svg" (Logo "CT" "#f6a8c8" "#d4af37")
